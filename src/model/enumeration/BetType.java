@@ -18,9 +18,14 @@ public enum BetType
       public void applyWinLoss(Player player, Slot winSlot)
       {
          // TODO implementation
-    	 if(winSlot.getPosition()==player.getBet() ) {
-    		 
+    	 if(winSlot.getColor()==Color.RED) {
+    		 if(player.getBetType() == RED) {
+    			 player.setPoints(player.getPoints() + player.getBet());
+    		 }
     	 }
+    	 else {
+			 player.setPoints(player.getPoints() - player.getBet());
+		 }
       }
    },
 	BLACK
@@ -29,9 +34,14 @@ public enum BetType
 	      public void applyWinLoss(Player player, Slot winSlot)
 	      {
 	         // TODO implementation
-	    	 if(winSlot.getPosition()==player.getBet() ) {
-	    		 
+	    	 if(winSlot.getColor()==Color.BLACK) {
+	    		 if(player.getBetType() == BLACK) {
+	    			 player.setPoints(player.getPoints() + player.getBet());
+	    		 }
 	    	 }
+	    	 else {
+    			 player.setPoints(player.getPoints() - player.getBet());
+    		 }
 	      }
 	   },
 	   GREEN0
@@ -40,9 +50,14 @@ public enum BetType
 	      public void applyWinLoss(Player player, Slot winSlot)
 	      {
 	         // TODO implementation
-	    	 if(winSlot.getPosition()==player.getBet() ) {
-	    		 
+	    	 if(winSlot.getColor() == Color.GREEN0) {
+	    		 if(player.getBetType() == GREEN0) {
+	    			 player.setPoints(player.getBet()*18);
+	    		 }
 	    	 }
+	    	 else {
+    			 player.setPoints(player.getPoints() - player.getBet());
+    		 }
 	      }
 	   },
 	   GREEN00
@@ -51,9 +66,15 @@ public enum BetType
 	      public void applyWinLoss(Player player, Slot winSlot)
 	      {
 	         // TODO implementation
-	    	 if(winSlot.getPosition()==player.getBet() ) {
+	    	 if(winSlot.getColor() == Color.GREEN00 ) {
+	    		 if(player.getBetType() == GREEN00) {
+	    			 player.setPoints(player.getBet()*18);
+	    		 }
 	    		 
 	    	 }
+	    	 else {
+    			 player.setPoints(player.getPoints() - player.getBet());
+    		 }
 	      }
 	   };
    

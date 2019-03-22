@@ -41,8 +41,25 @@ public class SlotImpl implements Slot {
 	@Override
 	public boolean equals(Slot slot)
 	{
-		
+		if(slot.getColor() == this.getColor() && slot.getNumber() == this.getNumber()) {
+			return true;
+		}
 		return false;
+	}
+	
+	@Override
+	public boolean equals(Object slot) {
+		Slot s = (Slot) slot;
+		if (s.equals(s) == this.equals(s)) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	   public int hashCode() {
+		
+		return this.getNumber();
 	}
 	
 	@Override

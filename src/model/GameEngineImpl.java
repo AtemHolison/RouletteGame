@@ -19,6 +19,7 @@ public class GameEngineImpl implements GameEngine {
 	private List<Player> players;
 	private List<Slot> slots;
 	private List<GameEngineCallback> callBacks;
+	private Slot winningSlot;
 	
 	
 	
@@ -52,8 +53,10 @@ public class GameEngineImpl implements GameEngine {
 			delay += delayIncrement;
 		}
 		
-		Slot winningSlot = this.slots.get(j);
-		this.callBacks.get(0).result(winningSlot, this);
+		this.winningSlot = this.slots.get(j);
+		calculateResult(this.winningSlot);
+		this.callBacks.get(0).result(this.winningSlot, this);
+		
 	}
 
 	//private method to get the index of a slot on the wheel
@@ -66,7 +69,7 @@ public class GameEngineImpl implements GameEngine {
 	public void calculateResult(Slot winningSlot)
 	{
 		for(Player player : this.players) {
-			player.getBetType().applyWinLoss(player, winningSlot);;
+			player.getBetType().applyWinLoss(player, winningSlot);
 		}
 		
 	}
@@ -76,8 +79,7 @@ public class GameEngineImpl implements GameEngine {
 	{
 		String playerId = player.getPlayerId();
 		
-		// find if there is a player with same id
-		// and replace in the game list of player 
+		// using the ArrayList set() function to replace players
 		for(int i = 0; i < this.players.size(); i++) {
 			if(this.players.get(i).getPlayerId() == playerId) {
 				this.players.set(i, player);
@@ -103,6 +105,7 @@ public class GameEngineImpl implements GameEngine {
 	@Override
 	public boolean removePlayer(Player player)
 	{
+		//using the remove() fucntion to remove players
 		for(int i = 0; i < this.players.size(); i++) {
 			if(player.getPlayerId().equals(this.players.get(i).getPlayerId())) {
 				this.players.remove(i);
@@ -122,7 +125,7 @@ public class GameEngineImpl implements GameEngine {
 	public boolean removeGameEngineCallback(GameEngineCallback gameEngineCallback)
 	{
 		int index = this.callBacks.indexOf(gameEngineCallback);
-		
+		//removing callbacks by index number on the collection list.
 		if(index != -1) {
 			this.callBacks.remove(index);
 			return true;

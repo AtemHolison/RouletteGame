@@ -1,10 +1,11 @@
 package view;
 
+
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import model.interfaces.GameEngine;
+import model.interfaces.Player;
 import model.interfaces.Slot;
 import view.interfaces.GameEngineCallback;
 
@@ -18,16 +19,20 @@ import view.interfaces.GameEngineCallback;
  */
 public class GameEngineCallbackImpl implements GameEngineCallback
 {
-   private static final Logger logger = Logger.getLogger(GameEngineCallback.class.getName());
-
+	private static final Logger logger = Logger.getLogger(GameEngineCallback.class.getName());
+	   
+   
+   
    public GameEngineCallbackImpl()
    {
       // FINE shows wheel spinning output, INFO only shows result
-      logger.setLevel(Level.FINE);
+	   logger.setUseParentHandlers(false);
+	   logger.setLevel(Level.FINE);
       ConsoleHandler handler = new ConsoleHandler();
       // PUBLISH this level
       handler.setLevel(Level.FINE);
       logger.addHandler(handler);
+      
    }
 
    @Override
@@ -40,12 +45,21 @@ public class GameEngineCallbackImpl implements GameEngineCallback
       logger.log(Level.FINE,  "Next slot: " + slot.toString());
    }
 
+   
    @Override
    public void result(Slot result, GameEngine engine)
    {
       // final results logged at Level.INFO
       logger.log(Level.INFO, "RESULT= " + result.toString());
+      System.out.println("");
       logger.log(Level.INFO, "FINAL PLAYER POINT BALANCES" );
+     
+      String c = "";
+      for(Player p : engine.getAllPlayers()) {
+    	   c += p.toString() + "\n";
+    	  }
+      logger.log(Level.INFO , "\n" +  c   ) ;
+      
       // TODO: complete this method to log results
    }
 }
